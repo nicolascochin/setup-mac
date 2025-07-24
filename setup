@@ -35,6 +35,7 @@ BREW_PACKAGES=(
   protonvpn
   spotify
   visual-studio-code
+  adobe-creative-cloud
   vlc
   whatsapp
   font-fira-code-nerd-font 
