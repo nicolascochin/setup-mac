@@ -1,0 +1,54 @@
+#!/bin/bash
+
+set -e
+
+echo "🔧 Setting up your Mac from scratch..."
+# Check if Homebrew is installed
+if ! command -v brew &> /dev/null; then
+  echo "📦 Homebrew not found. Installing..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  # Add Homebrew to PATH (Apple Silicon vs Intel)
+  if [[ $(uname -m) == "arm64" ]]; then
+    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> "$HOME/.zprofile"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  else
+    echo 'eval "$(/usr/local/bin/brew shellenv)"' >> "$HOME/.bash_profile"
+    eval "$(/usr/local/bin/brew shellenv)"
+  fi
+else
+  echo "✅ Homebrew is already installed."
+fi
+
+echo "📦 Installing packages via Homebrew..."
+# List of CLI packages to install
+BREW_PACKAGES=(
+  virtualbuddy # Virtual machines
+  gh
+  rclone
+  chezmoi
+  iterm2
+  brave-browser
+  orbstack
+  proton-mail
+  proton-pass
+  protonvpn
+  spotify
+  visual-studio-code
+  vlc
+  whatsapp
+  font-fira-code-nerd-font 
+)
+# Install packages
+for pkg in "${BREW_PACKAGES[@]}"; do
+  echo "➡️ Installing $pkg..."
+  brew install "$pkg"
+done
+
+echo "🔐 Setup GitHub authentication..."
+gh auth login 
+
+echo "setup shell & config files"
+sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply git@github.com:nicolascochin/dotfiles.git
+
+echo "🎉 Setup complete!"
