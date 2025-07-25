@@ -27,7 +27,7 @@ BREW_PACKAGES=(
   gh
   rclone
   chezmoi
-  iterm2
+  wezterm
   brave-browser
   orbstack
   proton-mail
@@ -50,6 +50,6 @@ echo "🔐 Setup GitHub authentication..."
 gh auth login 
 
 echo "setup shell & config files"
-sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply git@github.com:nicolascochin/dotfiles.git
+sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply https://github.com/nicolascochin/dotfiles.git
 
 echo "🎉 Setup complete!"
