@@ -28,6 +28,7 @@ BREW_PACKAGES=(
   rclone
   chezmoi
   wezterm
+  amethyst
   brave-browser
   orbstack
   proton-mail
