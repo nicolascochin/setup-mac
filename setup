@@ -28,7 +28,7 @@ BREW_PACKAGES=(
   rclone
   chezmoi
   wezterm
-  amethyst
+  tailscale-app
   brave-browser
   orbstack
   proton-mail
